@@ -155,8 +155,8 @@ vinhlong-food-reco/
 
 
 ## ⚡ Cách Chạy Website
-**Đầu tiên mở terminal, sau đó chạy lệnh sau**  
-cd "d:\DAI HOC\KHOALUANTOTNGHIEP_PhamMinhNhat\Sourcecode_KLTN\Sourcecode\vinhlong-food-reco" ; php -S localhost:8000 -t public
+**Đầu tiên mở terminal trong thư mục chứa code, sau đó chạy lệnh sau**  
+ php -S localhost:8000 -t public
 
 ## ✨ Hoàn Thành!
 
