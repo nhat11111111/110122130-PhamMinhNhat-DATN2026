@@ -1,0 +1,102 @@
+<!-- ADMIN DASHBOARD PAGE SECTION -->
+<!-- This file contains the HTML structure for the Admin Dashboard (Bảng Điều Khiển Quản Trị) -->
+<!-- Integration: This section should be placed in public/index.html as a hidden main element with id="adminDashboardSection" -->
+
+<main class="admin-main-content" id="adminDashboardSection" style="display: none;">
+    <div class="container admin-dashboard-container">
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb">
+            <span class="breadcrumb-item">
+                <a href="javascript:showAdminDashboard()">Bảng Điều Khiển</a>
+            </span>
+            <span class="breadcrumb-separator">»</span>
+            <span class="breadcrumb-item active" id="adminPageTitle">Quản Lý</span>
+        </div>
+
+        <!-- Main Layout: Sidebar + Content -->
+        <div class="admin-wrapper">
+            <!-- Left Sidebar: Admin Menu -->
+            <aside class="admin-sidebar">
+                <!-- Admin User Info -->
+                <div class="admin-user-info">
+                    <div class="admin-avatar"><i class="fas fa-user-shield"></i></div>
+                    <div class="admin-name">Admin</div>
+                    <button class="btn-logout" onclick="handleAdminLogout()">
+                        <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+                    </button>
+                </div>
+
+                <!-- Admin Menu Navigation -->
+                <nav class="admin-menu">
+                    <button class="admin-menu-item" onclick="showAdminManage('banner')">
+                        <i class="fas fa-image"></i> Quản lý Banner
+                    </button>
+                    <button class="admin-menu-item" onclick="showAdminManage('news')">
+                        <i class="fas fa-newspaper"></i> Quản lý Tin tức
+                    </button>
+                    <button class="admin-menu-item" onclick="showAdminManage('services')">
+                        <i class="fas fa-concierge-bell"></i> Quản lý Dịch vụ
+                    </button>
+                    <button class="admin-menu-item" onclick="showAdminManage('feedback')">
+                        <i class="fas fa-comments"></i> Quản lý Phản hồi
+                    </button>
+                    <button class="admin-menu-item" onclick="showAdminManage('attractions')">
+                        <i class="fas fa-camera"></i> Quản lý Điểm Tham Quan
+                    </button>
+                    <button class="admin-menu-item" onclick="showAdminManage('map')">
+                        <i class="fas fa-map"></i> Quản lý Bản Đồ Số
+                    </button>
+                    <hr>
+                    <button class="admin-menu-item" onclick="showAdminManage('accounts')">
+                        <i class="fas fa-users"></i> Quản lý Tài Khoản
+                    </button>
+                    <button class="admin-menu-item home-btn" onclick="showHomePage()">
+                        <i class="fas fa-home"></i> Đi Đến Trang Chủ
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Right Content: Admin Forms and Tables -->
+            <div class="admin-content" id="adminContent">
+                <div class="admin-welcome">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Chào mừng bạn đến bảng điều khiển quản trị</h3>
+                    <p>Chọn một mục từ menu bên trái để bắt đầu quản lý</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 
+FEATURES:
+- Admin authentication required (username: admin123, password: admin123)
+- Sidebar with navigation menu for 7 management categories
+- Logout button for admin session management
+- Dynamic content area for CRUD operations
+- Responsive 2-column layout (sidebar + content)
+- Link to return to user homepage
+
+MANAGEMENT MODULES:
+1. Quản lý Banner - Add/Edit/Delete website banners
+2. Quản lý Tin tức - Add/Edit/Delete news articles
+3. Quản lý Dịch vụ - Add/Edit/Delete services
+4. Quản lý Phản hồi - View/Delete customer feedback
+5. Quản lý Điểm Tham Quan - Add/Edit/Delete attractions
+6. Quản lý Bản Đồ Số - Add/Edit/Delete map locations
+7. Quản lý Tài Khoản - View/Edit/Delete user accounts with roles
+
+STYLING:
+- All CSS classes are defined in admin-dashboard.css
+- Consistent with other pages (home, news, feedback, etc.)
+- Responsive design for mobile, tablet, and desktop
+- Admin-specific color scheme and layout
+
+JAVASCRIPT:
+- showAdminDashboard() - Main display function
+- handleAdminLogin() - Authenticate admin user
+- handleAdminLogout() - End admin session
+- showAdminManage(type) - Display management interface for specific type
+- displayAdminContent(type) - Render content based on management type
+- CRUD functions for each management category (add, edit, delete)
+-->

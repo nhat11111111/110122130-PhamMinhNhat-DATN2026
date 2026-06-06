@@ -15,11 +15,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+        // Tạo user admin mặc định
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin User',
+            'email' => 'admin@vinhlong.com',
+            'username' => 'admin',
+            'password' => bcrypt('admin123'),
+            'phone' => '0276-3826000',
+            'role' => 'admin',
+            'status' => 'active',
+        ]);
+
+        // Tạo user bình thường
+        User::factory()->create([
+            'name' => 'User Test',
+            'email' => 'user@vinhlong.com',
+            'username' => 'user',
+            'password' => bcrypt('user123'),
+            'phone' => '0276-3826001',
+            'role' => 'user',
+            'status' => 'active',
+        ]);
+
+        // Chạy các seeders
+        $this->call([
+            CategorySeeder::class,
+            PlaceSeeder::class,
+            ArticleSeeder::class,
+            AccommodationSeeder::class,
         ]);
     }
 }

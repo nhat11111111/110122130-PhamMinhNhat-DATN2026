@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lưu Trú - Vĩnh Long Tourist</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/accommodations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <!-- Header Top -->
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="info-left">
+                        <div class="time-info">
+                            <i class="fas fa-clock"></i>
+                            <span id="currentTime">10:55:15 16/05/2026</span>
+                        </div>
+                        <span class="separator">|</span>
+                        <div class="weather-info">
+                            <i class="fas fa-cloud-sun"></i>
+                            <span>Thời tiết</span>
+                        </div>
+                    </div>
+                    <div class="info-right">
+                        <div class="language-selector">
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGXL5LOxMNK7mqVrfdpmOQjKy5ChGlWpPIg33eqozKNN-9E-KuwVVH8PN1SjkiY2gXd8wNkUpK96ssOZs0yIWnM7OYYveyB1_c1rzI9t8NNDDLF9hNdN-_L68E1vDFAR2KSfhdm2c5KE3HS5nR-Gp6T83QOC7U3EaaKkwFtxbiVkKRDPIgl3RnwJmnnOb2k57aBep0Jf5XYXaRxQ96JuL0WZbcyw4SpEg00kFr1CL5ncgACaCJYWn6jNpELhC-RIrR_U-2m_pNyfA" alt="English" class="flag-icon">
+                            <span>English</span>
+                            <span class="separator">|</span>
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHvkHYDjZe3OZSIlYGDGhoLcmx9dCP7WzTNjb91w-5xKf0Acj-xp0LiPXFGE_tCm1QTwz-3T102fOWOMCa_tOF5mtkHiOOqrwEX8h-d4hclkjZBqu35Eom-Z06uNVvzGAIBsbBzlE-TxluyOTMOSVvjqP9ZInDTjs3nB2aleVFBV6bExVJ6NuppgrptrTKvUAplqUl643QY4r18TZ-_5QUQ0LUv8LHx4UPcVQMgtO2qJ5btAUzehK_tUBFgUt9D1jCxmb6AE1f-js" alt="Vietnamese" class="flag-icon">
+                            <span>Tiếng Việt</span>
+                        </div>
+                        <button class="btn-login" onclick="showLoginPage()">
+                            <i class="fas fa-lock"></i> ĐĂNG NHẬP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Main -->
+        <div class="header-main">
+            <div class="container">
+                <div class="header-content">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🧭</div>
+                        <div class="logo-text">
+                            <div class="logo-name">Vinh Long</div>
+                            <div class="logo-tagline">Tourist</div>
+                        </div>
+                    </a>
+                    <nav class="nav-menu">
+                        <a href="index.html" class="nav-item">TRANG CHỦ</a>
+                        <a href="#" class="nav-item">TIN TỨC</a>
+                        <a href="accommodations.html" class="nav-item active">LƯU TRÚ</a>
+                        <a href="#" class="nav-item">LỮ HÀNH</a>
+                        <div class="nav-item-dropdown nav-services-dropdown">
+                            <a href="index.html" class="nav-item">DỊCH VỤ</a>
+                            <div class="dropdown-menu services-dropdown-menu">
+                                <a href="index.html?service=am-thuc" class="dropdown-item"><i class="fas fa-utensils"></i> Ẩm thực</a>
+                                <a href="index.html?service=mua-sam" class="dropdown-item"><i class="fas fa-shopping-bag"></i> Mua sắm</a>
+                            </div>
+                        </div>
+                        <a href="#" class="nav-item">TIỆN ÍCH</a>
+                        <a href="#" class="nav-item">PHẢN HỒI</a>
+                        <a href="#" class="nav-item">ĐIỂM THAM QUAN</a>
+                        <a href="#" class="nav-item">ĐA PHƯƠNG TIỆN</a>
+                        <a href="#" class="nav-item">BẢN ĐỒ SỐ</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="container">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumbs">
+                <a href="index.html">Trang chủ</a>
+                <span class="breadcrumb-sep">›</span>
+                <span>Lưu Trú</span>
+            </div>
+
+            <div class="content-wrapper">
+                <!-- Accommodations List -->
+                <div class="content-main">
+                    <div class="section-header">
+                        <h1>LƯU TRÚ</h1>
+                        <div class="search-filter">
+                            <div class="search-box">
+                                <input type="text" id="searchAccommodations" placeholder="Tìm kiếm..." class="search-input">
+                                <button class="search-btn"><i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="filter-group">
+                                <i class="fas fa-filter"></i>
+                                <select id="sortAccommodations" class="sort-select">
+                                    <option value="">Sắp xếp</option>
+                                    <option value="newest">Mới nhất</option>
+                                    <option value="oldest">Cũ nhất</option>
+                                    <option value="rating">Đánh giá cao nhất</option>
+                                    <option value="price-low">Giá thấp đến cao</option>
+                                    <option value="price-high">Giá cao đến thấp</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accommodations Grid -->
+                    <div id="accommodationsGrid" class="accommodations-grid">
+                        <!-- Accommodation items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">Bộ lọc nâng cao</h3>
+                        
+                        <div class="filter-section">
+                            <label class="filter-label">Loại lưu trú</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox"> Khách sạn</label>
+                                <label><input type="checkbox"> Nhà nghỉ</label>
+                                <label><input type="checkbox"> Resort</label>
+                                <label><input type="checkbox"> Homestay</label>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <label class="filter-label">Mức giá (VNĐ)</label>
+                            <div class="price-range">
+                                <input type="number" placeholder="Từ" min="0" class="price-input">
+                                <span>→</span>
+                                <input type="number" placeholder="Đến" min="0" class="price-input">
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <label class="filter-label">Sao đánh giá</label>
+                            <div class="rating-group">
+                                <label><input type="checkbox"> ⭐⭐⭐⭐⭐ 5 sao</label>
+                                <label><input type="checkbox"> ⭐⭐⭐⭐ 4 sao</label>
+                                <label><input type="checkbox"> ⭐⭐⭐ 3 sao</label>
+                                <label><input type="checkbox"> ⭐⭐ 2 sao</label>
+                            </div>
+                        </div>
+
+                        <div class="filter-section">
+                            <label class="filter-label">Tiện ích</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox"> WiFi miễn phí</label>
+                                <label><input type="checkbox"> Bể bơi</label>
+                                <label><input type="checkbox"> Nhà hàng</label>
+                                <label><input type="checkbox"> Phòng gym</label>
+                                <label><input type="checkbox"> Spa</label>
+                            </div>
+                        </div>
+
+                        <button class="btn-filter-reset">Đặt lại bộ lọc</button>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">Liên hệ hỗ trợ</h3>
+                        <div class="contact-info">
+                            <p><i class="fas fa-phone"></i> 0270 3822 000</p>
+                            <p><i class="fas fa-envelope"></i> info@vinhlong.gov.vn</p>
+                            <p><i class="fas fa-clock"></i> 8:00 - 17:00 (T2-T6)</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>THÔNG TIN LIÊN HỆ</h4>
+                    <p><strong>TRUNG TÂM XÚC TIẾN DU LỊCH VĨNH LONG</strong></p>
+                    <p>Địa chỉ: Số 107/2, đường Phạm Hùng, phường Long Châu, tỉnh Vĩnh Long</p>
+                    <p>Điện thoại: 0399836xxx</p>
+                    <p>Email: VinhLongTour@gmail.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>DANH MỤC</h4>
+                    <ul>
+                        <li><a href="#">Ẩm thực</a></li>
+                        <li><a href="#">Khám phá</a></li>
+                        <li><a href="#">Lịch trình</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>KẾT NỐI CHUNG TÔI</h4>
+                    <p><a href="https://www.facebook.com/hellodulichvinhlong" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vinh Long Tourist.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/accommodations.js"></script>
+</body>
+</html>

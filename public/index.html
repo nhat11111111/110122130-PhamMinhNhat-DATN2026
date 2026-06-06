@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinh Long Tourist - Du lịch Vĩnh Long</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/user-account.css">
+    <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/atm.css">
+    <link rel="stylesheet" href="/css/gasstation.css">
+    <link rel="stylesheet" href="/css/transport.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="info-left">
+                        <span class="date-time" id="dateTime"></span>
+                        <span class="separator">|</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Thời tiết</span>
+                    </div>
+
+                    <!-- Thanh tìm kiếm chính ở giữa -->
+                    <div class="header-top-search">
+                        <input type="text" placeholder="Tìm kiếm địa điểm, bài viết..." class="search-input" id="headerSearchInput" onkeypress="handleHeaderSearchKeypress(event)">
+                        <button type="button" class="search-btn" id="headerSearchBtn" onclick="handleHeaderSearch()"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    <div class="info-right">
+                        <div class="language-selector">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23ffffff'/%3E%3C/svg%3E" alt="English" class="flag-icon"> English
+                            <span class="separator">|</span>
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40'%3E%3Crect width='60' height='40' fill='%23d52b1e'/%3E%3Ccircle cx='30' cy='20' r='12' fill='%23ffc400'/%3E%3C/svg%3E" alt="Vietnamese" class="flag-icon"> Tiếng Việt
+                        </div>
+                        
+                        <!-- Login Button -->
+                        <button class="btn-login" id="btnLogin" onclick="showLoginPage()"><i class="fas fa-lock"></i> ĐĂNG NHẬP</button>
+                        
+                        <!-- User Account Menu (Hidden by default) -->
+                        <div class="user-account-menu" id="userAccountMenu" style="display: none;">
+                            <button class="user-account-btn" id="userAccountBtn" onclick="toggleUserMenu()">
+                                <img src="https://via.placeholder.com/30x30?text=Avatar" alt="Avatar" class="user-avatar" id="userAvatar">
+                                <span class="user-name" id="userName">Tên tài khoản</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            
+                            <!-- Dropdown Menu -->
+                            <div class="user-dropdown" id="userDropdown">
+                                <a href="javascript:showUserInfo()" class="dropdown-item">
+                                    <i class="fas fa-user"></i> Thông tin cơ bản
+                                </a>
+                                <a href="javascript:showUserSecurity()" class="dropdown-item">
+                                    <i class="fas fa-shield-alt"></i> Bảo mật
+                                </a>
+                                <a href="javascript:showUserSettings()" class="dropdown-item">
+                                    <i class="fas fa-cog"></i> Cài đặt
+                                </a>
+                                <a href="javascript:showUserHistory()" class="dropdown-item">
+                                    <i class="fas fa-history"></i> Lịch sử
+                                </a>
+                                <div class="dropdown-separator"></div>
+                                <a href="javascript:userLogout()" class="dropdown-item logout">
+                                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo" onclick="showHomePage()" style="cursor:pointer;">
+                        <div class="logo-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="logo-text">
+                            <div class="logo-name">Vinh Long</div>
+                            <div class="logo-subtitle">Tourist</div>
+                        </div>
+                    </div>
+
+                    <nav class="nav-menu">
+                        <a href="javascript:showHomePage()" class="nav-item active">TRANG CHỦ</a>
+                        <a href="javascript:showNewsPage()" class="nav-item">TIN TỨC</a>
+                        <div class="nav-item-dropdown nav-services-dropdown">
+                            <a href="javascript:void(0)" class="nav-item" id="navServices">DỊCH VỤ</a>
+                            <div class="dropdown-menu services-dropdown-menu">
+                                <a href="javascript:showServicesPage('am-thuc')" class="dropdown-item">
+                                    <i class="fas fa-utensils"></i> Ẩm thực
+                                </a>
+                                <a href="javascript:showServicesPage('mua-sam')" class="dropdown-item">
+                                    <i class="fas fa-shopping-bag"></i> Mua sắm
+                                </a>
+                            </div>
+                        </div>
+                        <a href="javascript:showUtilitiesPage()" class="nav-item">TIỆN ÍCH</a>
+                        <a href="javascript:showFeedbackPage()" class="nav-item">PHẢN HỒI</a>
+                        <a href="javascript:showAttractionsPage()" class="nav-item">ĐIỂM THAM QUAN</a>
+                        <a href="javascript:showDigitalMapPage()" class="nav-item">BẢN ĐỒ SỐ</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="mainContent">
+        <!-- Home Banner Carousel (5 slides, auto-play) -->
+        <section class="home-banner-carousel" id="homeBannerCarousel" aria-label="Banner trang chủ">
+            <div class="banner-slides" id="bannerSlides"></div>
+            <button type="button" class="banner-nav banner-prev" id="bannerPrev" aria-label="Banner trước">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button type="button" class="banner-nav banner-next" id="bannerNext" aria-label="Banner tiếp theo">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="banner-dots" id="bannerDots" role="tablist" aria-label="Chọn banner"></div>
+        </section>
+
+        <!-- Home News Preview -->
+        <section class="home-news-section">
+            <div class="container">
+                <div class="home-section-header">
+                    <button type="button" class="back-to-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Lên đầu trang">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <h2 class="home-section-title">Tin tức</h2>
+                </div>
+                <div class="home-news-grid" id="homeNewsGrid"></div>
+            </div>
+        </section>
+
+        <!-- Popular Attractions Section -->
+        <section class="home-attractions-section">
+            <div class="container">
+                <div class="home-section-header">
+                    <button type="button" class="back-to-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Lên đầu trang">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                    <h2 class="home-section-title">Địa điểm phổ biến</h2>
+                </div>
+                <div class="home-attractions-grid" id="homeAttractionsGrid"></div>
+                <div class="section-footer">
+                    <button type="button" class="view-all-btn" onclick="showAttractionsPage()" aria-label="Xem tất cả điểm đến">Xem tất cả điểm đến</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="content-grid">
+                <!-- MAP SECTION -->
+                <div class="map-section">
+                    <div class="map-container">
+                        <div class="map-placeholder">
+                            <i class="fas fa-map"></i>
+                            <p>Bản đồ Vĩnh Long</p>
+                            <small>VNPT MAPS</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LISTINGS SECTION -->
+                <div class="listings-section">
+                    <h2 class="section-title">KHÁCH SẠN & NHÀ HÀNG NỔI BẬT</h2>
+
+                    <div class="listings-container">
+                        <!-- Item 1 -->
+                        <div class="listing-item">
+                            <div class="listing-image">
+                                <div class="image-placeholder highlight" data-feature="loading">
+                                    <i class="fas fa-image"></i> Đang tải
+                                </div>
+                            </div>
+                            <div class="listing-info">
+                                <h3>KHÁCH SẠN VĂN TRẠNG</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Vĩnh Long</p>
+                                <p class="description">Dữ liệu đang được cập nhật...</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="listing-item">
+                            <div class="listing-image">
+                                <div class="image-placeholder highlight" data-feature="loading">
+                                    <i class="fas fa-image"></i> Đang tải
+                                </div>
+                            </div>
+                            <div class="listing-info">
+                                <h3>KHÁCH SẠN CỬU LONG A</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Vĩnh Long</p>
+                                <p class="description">Dữ liệu đang được cập nhật...</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="listing-item">
+                            <div class="listing-image">
+                                <div class="image-placeholder highlight" data-feature="loading">
+                                    <i class="fas fa-image"></i> Đang tải
+                                </div>
+                            </div>
+                            <div class="listing-info">
+                                <h3>COCO RIVERSIDE LODGE</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Vĩnh Long</p>
+                                <p class="description">Dữ liệu đang được cập nhật...</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="listing-item">
+                            <div class="listing-image">
+                                <div class="image-placeholder highlight" data-feature="loading">
+                                    <i class="fas fa-image"></i> Đang tải
+                                </div>
+                            </div>
+                            <div class="listing-info">
+                                <h3>KHÁCH SẠN KHỞI HOA</h3>
+                                <p class="location"><i class="fas fa-map-marker-alt"></i> Vĩnh Long</p>
+                                <p class="description">Dữ liệu đang được cập nhật...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- NEWS SECTION (Hidden by default) -->
+    <main class="news-main-content" id="newsSection" style="display: none;">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="javascript:showHomePage()">Trang chủ</a>
+                <span class="separator">»</span>
+                <span>Tin tức</span>
+            </div>
+
+            <div class="news-container">
+                <!-- LEFT SIDEBAR - NEWS LIST -->
+                <div class="news-sidebar">
+                    <div class="news-header">
+                        <h2>Tin tức</h2>
+                    </div>
+
+                    <div class="search-bar">
+                        <input type="text" placeholder="Tìm kiếm..." class="search-input" id="newsSearch">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    <div class="filter-sort">
+                        <select class="sort-select" id="newsSortSelect">
+                            <option value="newest">Sắp xếp: Mới nhất</option>
+                            <option value="oldest">Sắp xếp: Cũ nhất</option>
+                            <option value="popular">Sắp xếp: Phổ biến</option>
+                        </select>
+                    </div>
+
+                    <div class="news-list" id="newsList">
+                        <!-- News items will be loaded here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- RIGHT SIDEBAR - NEWS DETAIL & SCHEDULE -->
+                <div class="news-detail-section">
+                    <div class="news-detail" id="newsDetail">
+                        <div class="news-placeholder">
+                            <p>Chọn một bài viết để xem chi tiết</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule-section">
+                        <h3>Lịch trình của bạn</h3>
+                        <div class="schedule-item" id="schedulePlaceholder">
+                            <p>Chưa có điểm đến nào được chọn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SERVICES SECTION (Hidden by default) -->
+    <main class="services-main-content" id="servicesSection" style="display: none;">
+        <div class="container">
+            <div id="servicesListView">
+            <div class="breadcrumb">
+                <a href="javascript:showHomePage()">Trang chủ</a>
+                <span class="separator">»</span>
+                <span>Dịch vụ</span>
+                <span class="separator">»</span>
+                <span id="servicesBreadcrumbCategory">Ẩm thực</span>
+            </div>
+
+            <div class="services-category-tabs">
+                <button type="button" class="services-tab active" data-category="am-thuc" onclick="switchServicesCategory('am-thuc')">
+                    <i class="fas fa-utensils"></i> Ẩm thực
+                </button>
+                <button type="button" class="services-tab" data-category="mua-sam" onclick="switchServicesCategory('mua-sam')">
+                    <i class="fas fa-shopping-bag"></i> Mua sắm
+                </button>
+            </div>
+
+            <div class="page-header-services">
+                <h2 id="servicesPageTitle">ẨM THỰC VĨNH LONG</h2>
+                <p id="servicesPageDesc">Tập hợp các điểm ăn uống trong tỉnh Vĩnh Long</p>
+            </div>
+
+            <div class="services-layout">
+                <!-- LEFT SIDEBAR -->
+                <div class="services-sidebar">
+                    <div class="filter-section" id="servicesPriceFilter">
+                        <h3>GIÁ THAM KHẢO</h3>
+                        <div class="price-filters">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="0-100000" class="price-filter-input">
+                                <span>100.000đ</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="100000-300000" class="price-filter-input">
+                                <span>100.000 - 300.000đ</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="300000-500000" class="price-filter-input">
+                                <span>300.000 - 500.000đ</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="500000" class="price-filter-input">
+                                <span>500.000đ</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section" id="servicesTypeFilter">
+                        <h3 id="servicesTypeFilterTitle">LOẠI HÌNH KINH DOANH</h3>
+                        <div class="business-filters" id="servicesBusinessFilters">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="nha-hang" class="business-filter-input">
+                                <span>Nhà hàng</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="quan-an" class="business-filter-input">
+                                <span>Quán ăn</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="cafe" class="business-filter-input">
+                                <span>Café</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" value="quan-nuoc" class="business-filter-input">
+                                <span>Quán nước</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT CONTENT -->
+                <div class="services-content">
+                    <div class="services-search">
+                        <input type="text" id="searchServicesIndex" placeholder="Bạn muốn đi đâu, ai?" class="search-input-services">
+                        <button class="search-btn-services"><i class="fas fa-search"></i> Tìm kiếm</button>
+                        <button class="comment-btn-services"><i class="fas fa-comments"></i> Lịnh luận</button>
+                        <button class="like-btn-services"><i class="fas fa-thumbs-up"></i> Thích</button>
+                    </div>
+
+                    <div id="servicesGridIndex" class="services-grid">
+                        <div class="loading">Đang tải dịch vụ...</div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Chi tiết địa điểm dịch vụ -->
+            <div id="serviceDetailView" class="service-detail-view" style="display: none;">
+                <div class="breadcrumb service-detail-breadcrumb">
+                    <a href="javascript:backToServicesList()">Trang chủ</a>
+                    <span class="separator">»</span>
+                    <a href="javascript:backToServicesList()" id="serviceDetailBreadcrumbCategory">Ẩm thực</a>
+                    <span class="separator">»</span>
+                    <span id="serviceDetailBreadcrumbName">Chi tiết</span>
+                </div>
+
+                <div class="service-detail-topbar">
+                    <div class="service-detail-topbar-info">
+                        <span><i class="fas fa-clock"></i> MỞ CỬA: <strong id="serviceDetailOpen">07:00</strong></span>
+                        <span><i class="fas fa-clock"></i> ĐÓNG CỬA: <strong id="serviceDetailClose">22:00</strong></span>
+                        <span><i class="fas fa-phone"></i> <strong id="serviceDetailPhone">0986523256</strong></span>
+                        <span><i class="fas fa-map-marker-alt"></i> ĐỊA CHỈ: <strong id="serviceDetailAddress">—</strong></span>
+                    </div>
+                    <button type="button" class="btn-book-table-top" onclick="openServiceBooking(currentServiceDetailId)">ĐẶT BÀN</button>
+                </div>
+
+                <div class="service-detail-main">
+                    <div class="service-detail-info">
+                        <h1 id="serviceDetailTitle">NHÀ HÀNG HƯƠNG SEN</h1>
+                        <p class="service-detail-price"><i class="fas fa-tag"></i> Mức giá: <span id="serviceDetailPriceRange">0 đ - 350.000 đ</span></p>
+                        <div class="service-detail-desc">
+                            <h3>Mô tả:</h3>
+                            <p id="serviceDetailDescription">—</p>
+                        </div>
+                    </div>
+                    <div class="service-detail-gallery">
+                        <div class="gallery-main">
+                            <button type="button" class="gallery-nav gallery-prev" onclick="changeServiceGallery(-1)"><i class="fas fa-chevron-left"></i></button>
+                            <img id="serviceGalleryMain" src="" alt="Ảnh địa điểm">
+                            <button type="button" class="gallery-nav gallery-next" onclick="changeServiceGallery(1)"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        <div class="gallery-thumbs" id="serviceGalleryThumbs"></div>
+                    </div>
+                </div>
+
+                <section class="service-menu-section">
+                    <h2 id="serviceItemsSectionTitle">THỰC ĐƠN</h2>
+                    <p class="service-menu-tagline" id="serviceItemsSectionDesc">Tận hưởng không gian ấm cúng và có những bữa ăn ngon miệng bên người thân và gia đình.</p>
+                    <div class="service-menu-grid" id="serviceMenuGrid"></div>
+                </section>
+
+                <section class="service-reviews-section">
+                    <h2><i class="fas fa-thumbs-up"></i> Bình luận và Đánh giá (<span id="serviceReviewsCount">0</span>)</h2>
+
+                    <div id="serviceReviewFormWrap" class="service-review-form-wrap" style="display: none;">
+                        <div class="review-rating-input">
+                            <span>Đánh giá của bạn:</span>
+                            <div class="review-stars-input" id="reviewStarsInput">
+                                <i class="far fa-star" data-value="1"></i>
+                                <i class="far fa-star" data-value="2"></i>
+                                <i class="far fa-star" data-value="3"></i>
+                                <i class="far fa-star" data-value="4"></i>
+                                <i class="far fa-star" data-value="5"></i>
+                            </div>
+                        </div>
+                        <textarea id="serviceReviewComment" rows="4" placeholder="Viết bình luận của bạn..."></textarea>
+                        <button type="button" class="btn-submit-review" onclick="submitPlaceReview()">Gửi đánh giá</button>
+                    </div>
+
+                    <div id="serviceReviewLoginPrompt" class="service-review-login-prompt">
+                        <p><i class="fas fa-lock"></i> Vui lòng <a href="javascript:showLoginPage()">đăng nhập</a> để bình luận và đánh giá địa điểm này.</p>
+                    </div>
+
+                    <div id="serviceReviewsList" class="service-reviews-list"></div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal đặt bàn -->
+    <div id="serviceBookingModal" class="service-booking-modal" style="display: none;">
+        <div class="service-booking-backdrop" onclick="closeServiceBooking()"></div>
+        <div class="service-booking-dialog">
+            <button type="button" class="booking-close" onclick="closeServiceBooking()">&times;</button>
+            <h3 id="bookingModalTitle">ĐẶT BÀN</h3>
+            <p id="bookingModalPlace" class="booking-place-name"></p>
+            <form id="serviceBookingForm" onsubmit="submitServiceBooking(event)">
+                <div class="form-group">
+                    <label>Họ tên *</label>
+                    <input type="text" id="bookingName" required>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại *</label>
+                    <input type="tel" id="bookingPhone" required>
+                </div>
+                <div class="form-group">
+                    <label>Ngày đến *</label>
+                    <input type="date" id="bookingDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Số khách *</label>
+                    <input type="number" id="bookingGuests" min="1" max="50" value="2" required>
+                </div>
+                <div class="form-group">
+                    <label>Ghi chú</label>
+                    <textarea id="bookingNote" rows="3" placeholder="Yêu cầu đặc biệt (nếu có)"></textarea>
+                </div>
+                <button type="submit" class="btn-booking-submit">Xác nhận đặt bàn</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- UTILITIES SECTION (Hidden by default) -->
+    <main class="utilities-main-content" id="utilitiesSection" style="display: none;">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="javascript:showHomePage()">Trang chủ</a>
+                <span class="separator">»</span>
+                <span>Tiện Ích</span>
+            </div>
+
+            <div class="page-header-utilities">
+                <h2>TIỆN ÍCH VĨNH LONG</h2>
+                <p>Khám phá các tiện ích hỗ trợ du lịch tại Vĩnh Long</p>
+            </div>
+
+            <div class="utilities-layout">
+                <!-- LEFT SIDEBAR -->
+                <div class="utilities-sidebar">
+                    <div class="utilities-menu">
+                        <div class="menu-item" data-util-cat="transport" onclick="filterUtilitiesByCategory('transport')">
+                            <div class="menu-icon menu-icon-go">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <span>Đi đâu?</span>
+                        </div>
+                        <div class="menu-item" data-util-cat="dining" onclick="filterUtilitiesByCategory('dining')">
+                            <div class="menu-icon menu-icon-eat">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <span>Ăn gì?</span>
+                        </div>
+                        <div class="menu-item" data-util-cat="shopping" onclick="filterUtilitiesByCategory('shopping')">
+                            <div class="menu-icon menu-icon-shop">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <span>Mua gì?</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAIN CONTENT -->
+                <div class="utilities-content">
+                    <div class="utilities-search">
+                        <input type="text" id="searchUtilitiesIndex" placeholder="Tìm tiện ích..." class="search-input-utilities">
+                        <button class="search-btn-utilities"><i class="fas fa-search"></i></button>
+                    </div>
+
+                    <div id="utilitiesGridIndex" class="utilities-grid">
+                        <div class="loading">Đang tải tiện ích...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- TRANSPORT (DI CHUYEN) SECTION (Hidden by default) -->
+    <main class="transport-main-content" id="transportSection" style="display: none;">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="javascript:showHomePage()">Trang chủ</a>
+                <span class="separator">»</span>
+                <a href="javascript:backToUtilitiesFromTransport()">Tiện Ích</a>
+                <span class="separator">»</span>
+                <span>Di chuyển</span>
+            </div>
+
+            <!-- Category Tabs -->
+            <div class="transport-category-tabs" id="transportCategoryTabs">
+                <!-- Rendered by JS -->
+            </div>
+
+            <!-- Main Layout: list + map -->
+            <div class="transport-layout">
+                <!-- LEFT: Search + List -->
+                <div class="transport-list-panel">
+                    <div class="transport-search-box">
+                        <input type="text" id="transportSearchInput" class="transport-search-input" placeholder="Tìm kiếm" autocomplete="off">
+                        <div class="transport-search-suggestions" id="transportSearchSuggestions"></div>
+                    </div>
+                    <div class="transport-list-items" id="transportListItems">
+                        <div class="transport-list-empty">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Đang tải...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Google Map -->
+                <div class="transport-map-panel">
+                    <div id="transportMapContainer">
+                        <div class="transport-map-iframe-wrap">
+                            <button class="transport-map-expand-btn" title="Xem bản đồ lớn" onclick="openTransportMapFullArea()">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <iframe
+                                src="https://maps.google.com/maps?q=T%C3%A0u+du+l%E1%BB%8Bch+V%C4%A9nh+Long&output=embed&hl=vi"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Bản đồ Di chuyển Vĩnh Long">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- GAS STATION SECTION (Hidden by default) -->
+    <main class="gasstation-main-content" id="gasStationSection" style="display: none;">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="javascript:showHomePage()">Trang chủ</a>
+                <span class="separator">»</span>
+                <a href="javascript:backToUtilitiesFromGas()">Tiện Ích</a>
+                <span class="separator">»</span>
+                <span>Cây Xăng</span>
+            </div>
+
+            <!-- District Carousel -->
+            <div class="district-carousel-wrapper" id="districtCarouselWrapper">
+                <button class="district-carousel-btn district-carousel-btn-prev" id="districtCarouselPrev" onclick="districtCarouselPrev()" aria-label="Khu vực trước">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="district-carousel-track" id="districtCarouselTrack">
+                    <!-- Rendered by JS -->
+                </div>
+                <button class="district-carousel-btn district-carousel-btn-next" id="districtCarouselNext" onclick="districtCarouselNext()" aria-label="Khu vực tiếp">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Gas Station Layout: list + map -->
+            <div class="gasstation-layout">
+                <!-- LEFT: Search + List -->
+                <div class="gasstation-list-panel">
+                    <div class="gasstation-search-box">
+                        <input type="text" id="gasSearchInput" class="gasstation-search-input" placeholder="Tìm kiếm" autocomplete="off">
+                        <div class="gasstation-search-suggestions" id="gasSearchSuggestions"></div>
+                    </div>
+                    <div class="gasstation-list-items" id="gasListItems">
+                        <div class="gasstation-list-empty">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Đang tải...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Google Map -->
+                <div class="gasstation-map-panel">
+                    <div id="gasstationMapContainer">
+                        <div class="gasstation-map-iframe-wrap">
+                            <button class="gasstation-map-expand-btn" title="Xem bản đồ lớn" onclick="openGasMapFullArea()">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <iframe
+                                src="https://maps.google.com/maps?q=C%C3%A2y+x%C4%83ng+V%C4%A9nh+Long&output=embed&hl=vi"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Bản đồ Cây Xăng Vĩnh Long">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ATM SECTION (Hidden by default) -->
+    <main class="atm-main-content" id="atmSection" style="display: none;">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="javascript:showHomePage()">Trang chủ</a>
+                <span class="separator">»</span>
+                <a href="javascript:backToUtilitiesFromAtm()">Tiện Ích</a>
+                <span class="separator">»</span>
+                <span>ATM</span>
+            </div>
+
+            <!-- Bank Logo Carousel -->
+            <div class="bank-carousel-wrapper" id="bankCarouselWrapper">
+                <button class="bank-carousel-btn bank-carousel-btn-prev" id="bankCarouselPrev" onclick="bankCarouselPrev()" aria-label="Ngân hàng trước">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="bank-carousel-track" id="bankCarouselTrack">
+                    <!-- Rendered by JS -->
+                </div>
+                <button class="bank-carousel-btn bank-carousel-btn-next" id="bankCarouselNext" onclick="bankCarouselNext()" aria-label="Ngân hàng tiếp">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- ATM Layout: list + map -->
+            <div class="atm-layout">
+                <!-- LEFT: Search + List -->
+                <div class="atm-list-panel">
+                    <div class="atm-search-box">
+                        <input type="text" id="atmSearchInput" class="atm-search-input" placeholder="Tìm kiếm" autocomplete="off">
+                        <div class="atm-search-suggestions" id="atmSearchSuggestions"></div>
+                    </div>
+                    <div class="atm-list-items" id="atmListItems">
+                        <div class="atm-list-empty">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <span>Đang tải...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Google Map -->
+                <div class="atm-map-panel">
+                    <div id="atmMapContainer">
+                        <div class="atm-map-iframe-wrap">
+                            <button class="atm-map-expand-btn" title="Xem bản đồ lớn" onclick="openAtmMapFullArea()">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </button>
+                            <iframe
+                                src="https://maps.google.com/maps?q=ATM+V%C4%A9nh+Long&output=embed&hl=vi"
+                                allowfullscreen
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                title="Bản đồ ATM Vĩnh Long">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FEEDBACK SECTION (Hidden by default) -->
+    <main class="feedback-main-content" id="feedbackSection" style="display: none;">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="javascript:showHomePage()">Trang chủ</a>
+                <span class="separator">»</span>
+                <span>Phản Hồi</span>
+            </div>
+
+            <div class="page-header-feedback">
+                <h2>PHẢN HỒI THÔNG TIN</h2>
+                <p>Chia sẻ ý kiến và góp ý của bạn để giúp chúng tôi cải thiện dịch vụ</p>
+            </div>
+
+            <div class="feedback-container">
+                <!-- FEEDBACK FORM -->
+                <div class="feedback-form-wrapper">
+                    <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)">
+                        <div class="form-group">
+                            <label for="feedbackName">Họ tên *</label>
+                            <input type="text" id="feedbackName" name="name" required placeholder="Nhập họ tên của bạn">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="feedbackEmail">Email *</label>
+                                <input type="email" id="feedbackEmail" name="email" required placeholder="Nhập email của bạn">
+                            </div>
+                            <div class="form-group">
+                                <label for="feedbackDate">Ngày giờ</label>
+                                <input type="text" id="feedbackDate" readonly placeholder="Tự động cập nhật">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedbackSubject">Chủ đề *</label>
+                            <input type="text" id="feedbackSubject" name="subject" required placeholder="Nhập chủ đề phản hồi">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="feedbackContent">Nội dung *</label>
+                            <textarea id="feedbackContent" name="content" required placeholder="Nhập nội dung phản hồi của bạn" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI">
+                                <div style="width: 302px; height: 422px; position: relative;">
+                                    <div style="width: 100%; height: 100%; border: 1px solid #d3d3d3; border-radius: 3px; background-color: #f9f9f9; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 10px; box-sizing: border-box;">
+                                        <div style="width: 100%; height: 20px; margin-bottom: 10px;">
+                                            <input type="checkbox" id="feedbackRecaptcha" style="width: 20px; height: 20px; margin-right: 10px; cursor: pointer;">
+                                            <label for="feedbackRecaptcha" style="font-size: 12px; color: #555; cursor: pointer;">Tôi không phải là người máy</label>
+                                        </div>
+                                        <p style="font-size: 11px; color: #999; margin: 0; line-height: 1.4;">
+                                            Bằng cách nhấp vào hộp kiểm, bạn đồng ý rằng bạn không phải là robot và sẽ tuân thủ các điều khoản sử dụng của chúng tôi.
+                                        </p>
+                                        <p style="font-size: 11px; color: #999; margin: 10px 0 0 0;">
+                                            <a href="javascript:void(0)" style="color: #1f73e7; text-decoration: none;">Privacy</a> - 
+                                            <a href="javascript:void(0)" style="color: #1f73e7; text-decoration: none;">Terms</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-submit">
+                                <i class="fas fa-paper-plane"></i> Đăng phản ánh
+                            </button>
+                            <button type="button" class="btn btn-capture">
+                                <i class="fas fa-camera"></i> Chụp hình ảnh
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- FEEDBACK LIST -->
+                <div class="feedback-list-wrapper">
+                    <h3 class="feedback-list-title">DANH SÁCH PHẢN ÁNH</h3>
+                    
+                    <div id="feedbackList" class="feedback-list">
+                        <div class="loading">Đang tải danh sách phản hồi...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ATTRACTIONS PAGE SECTION (Hidden by default) -->
+    <main class="attractions-main-content" id="attractionsSection" style="display: none;">
+        <div class="container">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">
+                    <a href="javascript:showHomePage()">Trang chủ</a>
+                </span>
+                <span class="breadcrumb-separator">»</span>
+                <span class="breadcrumb-item active">Điểm Tham Quan</span>
+            </div>
+
+            <div class="page-header-attractions">
+                <h2>ĐIỂM THAM QUAN VĨNH LONG</h2>
+                <p>Khám phá những địa điểm du lịch nổi tiếng và hấp dẫn tại Vĩnh Long</p>
+            </div>
+
+            <div class="attractions-container">
+                <!-- Sidebar -->
+                <aside class="attractions-sidebar">
+                    <!-- Category Filter -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">
+                            <i class="fas fa-list"></i> CHỈ PHÍ
+                        </h3>
+                        <div class="filter-options">
+                            <label class="filter-item">
+                                <input type="checkbox" value="free" class="attraction-filter"> Miễn phí
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="paid" class="attraction-filter"> Có phí
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Type Filter -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">
+                            <i class="fas fa-tag"></i> LOẠI HÌNH
+                        </h3>
+                        <div class="filter-options">
+                            <label class="filter-item">
+                                <input type="checkbox" value="nature" class="attraction-filter"> Du lịch sinh thái - nghi dưỡng
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="cultural" class="attraction-filter"> Du lịch MICE (Du lịch hội nghị)
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="recreation" class="attraction-filter"> Du lịch vui chơi, giải trí
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="cultural" class="attraction-filter"> Bảo tàng
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="history" class="attraction-filter"> Du lịch lịch sử - văn hóa cấp quốc gia
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="history" class="attraction-filter"> Du lịch lịch sử - văn hóa cấp Tỉnh
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="education" class="attraction-filter"> Du lịch danh nhân - về nguồn
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="education" class="attraction-filter"> Làng nghề truyền thống
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Service Filter -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">
+                            <i class="fas fa-concierge-bell"></i> DỊCH VỤ
+                        </h3>
+                        <div class="filter-options">
+                            <label class="filter-item">
+                                <input type="checkbox" value="catering" class="attraction-filter"> Chuỗ ăn cuối
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="shopping" class="attraction-filter"> Shop lưu niệm
+                            </label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="attractions-content">
+                    <!-- Search and Action Buttons -->
+                    <div class="attractions-header">
+                        <div class="search-wrapper">
+                            <input type="text" id="attractionSearch" placeholder="Tìm kiếm địa điểm..." class="search-input">
+                            <button class="search-btn"><i class="fas fa-search"></i></button>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn-filter">
+                                <i class="fas fa-filter"></i> Tìm kiếm
+                            </button>
+                            <button class="btn-sort">
+                                <i class="fas fa-sort"></i> Sắp xếp <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <button class="btn-view">
+                                <i class="fas fa-th"></i> Thích
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Attractions Grid -->
+                    <div id="attractionsList" class="attractions-grid">
+                        <div class="loading">Đang tải danh sách điểm tham quan...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- DIGITAL MAP PAGE SECTION (Hidden by default) -->
+    <main class="digital-map-main-content" id="digitalMapSection" style="display: none;">
+        <div class="container digital-map-container">
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">
+                    <a href="javascript:showHomePage()">Trang chủ</a>
+                </span>
+                <span class="breadcrumb-separator">»</span>
+                <span class="breadcrumb-item active">Bản Đồ Số</span>
+            </div>
+
+            <div class="page-header-digitalmap">
+                <h2>BẢN ĐỒ SỐ VĨNH LONG</h2>
+                <p>Khám phá các địa điểm ăn uống và điểm tham quan trên bản đồ tương tác</p>
+            </div>
+
+            <div class="digital-map-wrapper">
+                <!-- Sidebar with Filters -->
+                <aside class="digital-map-sidebar">
+                    <!-- Location Search -->
+                    <div class="map-search-group">
+                        <h3 class="filter-title">
+                            <i class="fas fa-search"></i> Tìm Kiếm
+                        </h3>
+                        <input type="text" id="mapSearch" placeholder="Nhập tên địa điểm..." class="search-input">
+                    </div>
+
+                    <!-- Category Filter -->
+                    <div class="filter-group">
+                        <h3 class="filter-title">
+                            <i class="fas fa-list"></i> DANH MỤC
+                        </h3>
+                        <div class="filter-options">
+                            <label class="filter-item">
+                                <input type="checkbox" value="restaurant" class="map-category-filter" checked> 
+                                <i class="fas fa-utensils"></i> Ăn Uống
+                            </label>
+                            <label class="filter-item">
+                                <input type="checkbox" value="attraction" class="map-category-filter" checked> 
+                                <i class="fas fa-camera"></i> Điểm Tham Quan
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="map-legend">
+                        <h3 class="filter-title">
+                            <i class="fas fa-layer-group"></i> Chỉ Dẫn
+                        </h3>
+                        <div class="legend-item">
+                            <span class="legend-marker restaurant"></span>
+                            <span>Ăn Uống</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-marker attraction"></span>
+                            <span>Điểm Tham Quan</span>
+                        </div>
+                    </div>
+
+                    <!-- Places List -->
+                    <div class="places-list">
+                        <h3 class="filter-title">
+                            <i class="fas fa-list-ul"></i> Danh Sách Địa Điểm
+                        </h3>
+                        <div id="mapPlacesList" class="places-items">
+                            <div class="loading">Đang tải danh sách...</div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Map Container -->
+                <div class="digital-map-content">
+                    <div id="mapContainer" class="map-viewer">
+                        <div class="map-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Đang tải bản đồ...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- LOGIN FORM SECTION (Hidden by default) -->
+    <main class="auth-main-content" id="loginSection" style="display: none;">
+        <div class="auth-container">
+            <div class="auth-form login-form" id="userLoginForm">
+                <div class="auth-header">
+                    <h2>ĐĂNG NHẬP</h2>
+                    <button class="close-auth-btn" onclick="showHomePage()"><i class="fas fa-times"></i></button>
+                </div>
+
+                <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="loginUsername" placeholder="Tên tài khoản" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="loginPassword" placeholder="Mật khẩu" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="rememberMe">
+                            <span>Lưu tài khoản</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Đăng nhập</button>
+                </form>
+
+                <div class="auth-links">
+                    <p>Lưu ý khi thực hiện đăng nhập là bạn đồng ý với 
+                        <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách quyền riêng tư</a> của dịch vụ</p>
+                    <div class="auth-footer">
+                        <a href="javascript:showRegistrationPage()"><i class="fas fa-user-plus"></i> Đăng ký</a>
+                        <a href="javascript:showDeveloping()"><i class="fas fa-key"></i> Quên mật khẩu</a>
+                        <a href="javascript:showAdminLoginForm()" style="border-left: 1px solid #ddd; padding-left: 10px; margin-left: 10px;"><i class="fas fa-lock"></i> Đăng nhập Admin</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN LOGIN FORM (Hidden by default) -->
+            <div class="auth-form login-form" id="adminLoginForm" style="display: none;">
+                <div class="auth-header">
+                    <h2><i class="fas fa-user-shield"></i> ĐĂNG NHẬP ADMIN</h2>
+                    <button class="close-auth-btn" onclick="showLoginPage()"><i class="fas fa-times"></i></button>
+                </div>
+
+                <form id="adminLoginFormElement" onsubmit="handleAdminLogin(event)">
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="adminUsername" placeholder="Tên tài khoản" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="adminPassword" placeholder="Mật khẩu" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit"><i class="fas fa-sign-in-alt"></i> Đăng nhập Admin</button>
+                </form>
+
+                <div class="auth-links">
+                    <p style="font-size: 12px; color: #666;">Chỉ các quản trị viên mới có thể đăng nhập tại đây.</p>
+                    <div class="auth-footer">
+                        <a href="#" onclick="showLoginPage(); return false;"><i class="fas fa-arrow-left"></i> Quay lại Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- REGISTRATION FORM SECTION (Hidden by default) -->
+    <main class="auth-main-content" id="registrationSection" style="display: none;">
+        <div class="auth-container">
+            <div class="auth-form registration-form">
+                <div class="auth-header">
+                    <h2>TẠO TÀI KHOẢN</h2>
+                    <button class="close-auth-btn" onclick="showHomePage()"><i class="fas fa-times"></i></button>
+                </div>
+
+                <form id="registrationForm" onsubmit="handleRegistrationSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group form-col-2">
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="regFirstName" placeholder="Họ" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-col-2">
+                            <div class="input-wrapper">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="regLastName" placeholder="Tên" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-user-tag"></i>
+                            <input type="text" id="regUsername" placeholder="Tên tài khoản" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="regPassword" placeholder="Mật khẩu" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="regConfirmPassword" placeholder="Nhập lại mật khẩu" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="regPhone" placeholder="Số điện thoại" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="regEmail" placeholder="Email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <input type="text" id="regAddress" placeholder="Địa chỉ" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group form-col-2">
+                            <div class="input-wrapper">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="regBirthDate" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-col-2">
+                            <select id="regCountry" required>
+                                <option value="">Việt Nam</option>
+                                <option value="VN">Việt Nam</option>
+                                <option value="US">Hoa Kỳ</option>
+                                <option value="JP">Nhật Bản</option>
+                                <option value="CN">Trung Quốc</option>
+                                <option value="TH">Thái Lan</option>
+                                <option value="KR">Hàn Quốc</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group gender-group">
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="male" required>
+                            <span>Nam</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="female">
+                            <span>Nữ</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="other">
+                            <span>Khác</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group occupation-group">
+                        <label class="radio-label">
+                            <input type="radio" name="occupation" value="employee" required>
+                            <span>Nhân viên</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="occupation" value="businessman">
+                            <span>Doanh nghiệp</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <p style="font-size: 12px; color: #666; margin: 10px 0;">
+                            <i class="fas fa-info-circle" style="color: #ff6b35; margin-right: 5px;"></i>
+                            Mật khẩu tối thiểu 6 ký tự (bao gồm chữ và số)
+                        </p>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="regTerms" required>
+                            <span>Tôi đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách quyền riêng tư</a> từ dịch vụ</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Đăng ký</button>
+                </form>
+
+                <div class="auth-footer-reg">
+                    <p><a href="javascript:showLoginPage()"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ADMIN DASHBOARD SECTION (Hidden by default) -->
+    <main class="admin-main-content" id="adminDashboardSection" style="display: none;">
+        <div class="container admin-dashboard-container">
+            <!-- Breadcrumb Navigation -->
+            <div class="breadcrumb">
+                <span class="breadcrumb-item">
+                    <a href="javascript:showAdminDashboard()">Bảng Điều Khiển</a>
+                </span>
+                <span class="breadcrumb-separator">»</span>
+                <span class="breadcrumb-item active" id="adminPageTitle">Quản Lý</span>
+            </div>
+
+            <!-- Main Layout: Sidebar + Content -->
+            <div class="admin-wrapper">
+                <!-- Left Sidebar: Admin Menu -->
+                <aside class="admin-sidebar">
+                    <div class="admin-user-info">
+                        <div class="admin-avatar"><i class="fas fa-user-shield"></i></div>
+                        <div class="admin-name">Admin</div>
+                        <button class="btn-logout" onclick="handleAdminLogout()"><i class="fas fa-sign-out-alt"></i> Đăng Xuất</button>
+                    </div>
+
+                    <nav class="admin-menu">
+                        <button class="admin-menu-item" onclick="showAdminManage('banner')">
+                            <i class="fas fa-image"></i> Quản lý Banner
+                        </button>
+                        <button class="admin-menu-item" onclick="showAdminManage('news')">
+                            <i class="fas fa-newspaper"></i> Quản lý Tin tức
+                        </button>
+                        <button class="admin-menu-item" onclick="showAdminManage('services')">
+                            <i class="fas fa-concierge-bell"></i> Quản lý Dịch vụ
+                        </button>
+                        <button class="admin-menu-item" onclick="showAdminManage('feedback')">
+                            <i class="fas fa-comments"></i> Quản lý Phản hồi
+                        </button>
+                        <button class="admin-menu-item" onclick="showAdminManage('attractions')">
+                            <i class="fas fa-camera"></i> Quản lý Điểm Tham Quan
+                        </button>
+                        <button class="admin-menu-item" onclick="showAdminManage('map')">
+                            <i class="fas fa-map"></i> Quản lý Bản Đồ Số
+                        </button>
+                        <button class="admin-menu-item" onclick="showAdminManage('accounts')">
+                            <i class="fas fa-users"></i> Quản lý Tài khoản
+                        </button>
+                        <hr>
+                        <button class="admin-menu-item home-btn" onclick="showHomePage()">
+                            <i class="fas fa-home"></i> Đi Đến Trang Chủ
+                        </button>
+                    </nav>
+                </aside>
+
+                <!-- Right Content: Admin Forms -->
+                <div class="admin-content" id="adminContent">
+                    <div class="admin-welcome">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Chào mừng bạn đến bảng điều khiển quản trị</h3>
+                        <p>Chọn một mục từ menu bên trái để bắt đầu quản lý</p>
+                    </div>
+
+                    <!-- ACCOUNT MANAGEMENT SECTION -->
+                    <div id="accountManagementSection" class="admin-management-section" style="display: none;">
+                        <div class="management-header">
+                            <h3>Quản Lý Tài Khoản</h3>
+                            <p>Quản lý tất cả tài khoản truy cập vào website</p>
+                        </div>
+
+                        <!-- Filter and Search -->
+                        <div class="management-toolbar">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="accountSearchInput" placeholder="Tìm kiếm theo tên, email hoặc username..." onkeyup="filterAccounts()">
+                            </div>
+                            <div class="filter-section">
+                                <select id="accountRoleFilter" onchange="filterAccounts()">
+                                    <option value="">-- Tất cả vai trò --</option>
+                                    <option value="user">Người dùng</option>
+                                    <option value="admin">Quản trị viên</option>
+                                </select>
+                                <select id="accountStatusFilter" onchange="filterAccounts()">
+                                    <option value="">-- Tất cả trạng thái --</option>
+                                    <option value="active">Hoạt động</option>
+                                    <option value="inactive">Không hoạt động</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Accounts Table -->
+                        <div class="table-wrapper">
+                            <table class="admin-table accounts-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Họ Tên</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Điện Thoại</th>
+                                        <th>Vai Trò</th>
+                                        <th>Trạng Thái</th>
+                                        <th>Ngày Tạo</th>
+                                        <th>Hành Động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="accountsTableBody">
+                                    <!-- Accounts will be populated here by JavaScript -->
+                                    <tr>
+                                        <td colspan="9" class="text-center">Đang tải dữ liệu...</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Statistics -->
+                        <div class="management-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h4>Tổng Tài Khoản</h4>
+                                    <p id="totalAccounts">0</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h4>Người Dùng</h4>
+                                    <p id="userCount">0</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-user-shield"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h4>Quản Trị Viên</h4>
+                                    <p id="adminCount">0</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h4>Hoạt Động</h4>
+                                    <p id="activeCount">0</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SUCCESS NOTIFICATION -->
+    <div class="notification" id="successNotification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notificationMessage">Đăng ký thành công!</span>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <div class="modal" id="developingModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2><i class="fas fa-wrench"></i> Chức năng này đang phát triển</h2>
+            <p>Tính năng này sẽ được cập nhật trong thời gian sắp tới. Vui lòng quay lại sau.</p>
+            <button class="btn-close" onclick="closeDevelopingModal()">Đóng</button>
+        </div>
+    </div>
+
+    <script>
+        // Inline functions for testing
+        function showDeveloping() {
+            const modal = document.getElementById('developingModal');
+            if (modal) {
+                modal.classList.add('show');
+            }
+        }
+
+        function closeDevelopingModal() {
+            const modal = document.getElementById('developingModal');
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        }
+
+        // Update date/time
+        function updateDateTime() {
+            const now = new Date();
+            const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateTimeString = now.toLocaleDateString('vi-VN', options);
+            const elem = document.getElementById('dateTime');
+            if (elem) {
+                elem.textContent = dateTimeString;
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+
+            // Close modal handlers
+            const closeBtn = document.querySelector('.close-modal');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeDevelopingModal);
+            }
+
+            // Make functions globally available
+            window.showDeveloping = showDeveloping;
+            window.closeDevelopingModal = closeDevelopingModal;
+        });
+    </script>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Contact Section -->
+                <div class="footer-section">
+                    <h3 class="footer-title">THÔNG TIN LIÊN HỆ</h3>
+                    <div class="contact-info">
+                        <p><strong>TRUNG TÂM XÚC TIẾN DU LỊCH VĨNH LONG</strong></p>
+                        <p>Địa chỉ: Số 107/2, đường Phạm Hùng, phường Long Châu, tỉnh Vĩnh Long</p>
+                        <p class="highlight-text">Điện thoại: <span>0399836xxx</span></p>
+                        <p class="highlight-text">Email: <span>VinhLongTour@gmail.com</span></p>
+                    </div>
+                </div>
+
+                <!-- Categories Section -->
+                <div class="footer-section">
+                    <h3 class="footer-title">DANH MỤC</h3>
+                    <ul class="footer-links">
+                        <li><a href="javascript:showDeveloping()"><i class="fas fa-chevron-right"></i> Ẩm thực</a></li>
+                        <li><a href="javascript:showDeveloping()"><i class="fas fa-chevron-right"></i> Khám phá</a></li>
+                        <li><a href="javascript:showDeveloping()"><i class="fas fa-chevron-right"></i> Lịch trình</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social Section -->
+                <div class="footer-section">
+                    <h3 class="footer-title">KẾT NỐI CHÚNG TÔI TRÊN MẠNG XÃ HỘI</h3>
+                    <div class="social-info">
+                        <a href="https://www.facebook.com/hellodulichvinhlong" target="_blank" class="social-link facebook" title="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <div class="social-stats">
+                            <p><strong>Lượt truy cập:</strong> <span class="highlight-text placeholder">10.416.045</span></p>
+                            <p><strong>Tháng này:</strong> <span class="highlight-text placeholder">261.832</span></p>
+                            <p><strong>Đang online:</strong> <span class="highlight-text">2</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vinh Long Tourist.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== USER ACCOUNT MODALS ========== -->
+    
+    <!-- Modal: User Basic Information -->
+    <div class="modal" id="userInfoModal">
+        <div class="modal-content user-info-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-user"></i> Thông tin cơ bản</h2>
+                <button class="modal-close" onclick="closeUserInfoModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <!-- Avatar Section -->
+                <div class="user-avatar-section">
+                    <img src="https://via.placeholder.com/120x120?text=Avatar" alt="Avatar" class="modal-user-avatar" id="modalUserAvatar">
+                    <button type="button" class="btn-change-avatar" onclick="showAvatarModal()">
+                        <i class="fas fa-camera"></i> Thay đổi ảnh đại diện
+                    </button>
+                </div>
+
+                <!-- User Info Form -->
+                <form id="userInfoForm" onsubmit="updateUserInfo(event)">
+                    <div class="form-group">
+                        <label>Tên đầy đủ</label>
+                        <input type="text" id="infFullName" placeholder="Nhập tên đầy đủ" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="infEmail" placeholder="example@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="tel" id="infPhone" placeholder="0xxxxxxxxx">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" id="infAddress" placeholder="Địa chỉ của bạn">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group form-col-2">
+                            <label>Ngày sinh</label>
+                            <input type="date" id="infBirthDate">
+                        </div>
+                        <div class="form-group form-col-2">
+                            <label>Giới tính</label>
+                            <select id="infGender">
+                                <option value="">Chọn giới tính</option>
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tỉnh/Thành phố</label>
+                        <input type="text" id="infCity" placeholder="Vĩnh Long">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeUserInfoModal()">Hủy</button>
+                        <button type="submit" class="btn-primary">Lưu thay đổi</button>
+                    </div>
+                </form>
+
+                <!-- Additional Options -->
+                <div class="user-info-options">
+                    <button type="button" class="btn-option" onclick="showPasswordModal()">
+                        <i class="fas fa-key"></i> Đổi mật khẩu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Change Password -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content password-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-key"></i> Đổi mật khẩu</h2>
+                <button class="modal-close" onclick="closePasswordModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="passwordForm" onsubmit="changePassword(event)">
+                    <div class="form-group">
+                        <label>Mật khẩu hiện tại</label>
+                        <div class="password-input-group">
+                            <input type="password" id="currentPassword" placeholder="Nhập mật khẩu hiện tại" required>
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('currentPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mật khẩu mới</label>
+                        <div class="password-input-group">
+                            <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới" required>
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('newPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="password-hint">Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Xác nhận mật khẩu mới</label>
+                        <div class="password-input-group">
+                            <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu mới" required>
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirmPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="password-strength">
+                        <label>Độ mạnh mật khẩu:</label>
+                        <div class="strength-bar" id="strengthBar"></div>
+                        <p id="strengthText" class="strength-text">Chưa xác định</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closePasswordModal()">Hủy</button>
+                        <button type="submit" class="btn-primary">Đổi mật khẩu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Change Avatar -->
+    <div class="modal" id="avatarModal">
+        <div class="modal-content avatar-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-camera"></i> Thay đổi ảnh đại diện</h2>
+                <button class="modal-close" onclick="closeAvatarModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="avatar-upload-section">
+                    <div class="avatar-preview" id="avatarPreview">
+                        <img src="https://via.placeholder.com/150x150?text=Avatar" alt="Preview" id="previewImage">
+                    </div>
+                    
+                    <div class="upload-area" id="uploadArea" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Kéo ảnh vào đây hoặc <label class="upload-link">chọn từ máy tính<input type="file" id="avatarFile" accept="image/*" style="display:none;" onchange="handleAvatarSelect(event)"></label></p>
+                        <small>JPG, PNG, GIF. Kích thước tối đa 5MB</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeAvatarModal()">Hủy</button>
+                        <button type="button" class="btn-primary" onclick="uploadAvatar()">Lưu ảnh đại diện</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Developing Features -->
+    <div class="modal" id="developingModal">
+        <div class="modal-content developing-modal">
+            <div class="modal-header">
+                <h2 id="developingTitle"><i class="fas fa-cog"></i> Đang được phát triển</h2>
+                <button class="modal-close" onclick="closeDevelopingModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="developing-content">
+                    <div class="developing-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Chức năng này đang được phát triển</h3>
+                    <p>Chúng tôi đang làm việc để mang đến cho bạn tính năng tốt hơn. Vui lòng quay lại kiểm tra sau!</p>
+                    <button type="button" class="btn-primary" onclick="closeDevelopingModal()">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH RESULTS MODAL -->
+    <div class="modal" id="searchResultsModal">
+        <div class="modal-content search-results-content">
+            <div class="modal-header">
+                <h2>Kết quả tìm kiếm</h2>
+                <button class="modal-close" onclick="closeSearchResults()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="search-results-container" id="searchResultsContainer">
+                    <!-- Results will be inserted here -->
+                </div>
+                
+                <!-- No Results Message -->
+                <div class="no-results-container" id="noResultsContainer" style="display: none;">
+                    <div class="no-results-content">
+                        <i class="fas fa-search no-results-icon"></i>
+                        <h3>Không tìm thấy kết quả</h3>
+                        <p>Rất tiếc, chúng tôi không tìm thấy địa điểm hoặc bài viết nào phù hợp với từ khóa "<span id="searchKeyword"></span>"</p>
+                        <p class="no-results-suggestion">Vui lòng thử lại với từ khóa khác hoặc xem tất cả <a href="javascript:showAllPlaces()">địa điểm</a> của chúng tôi.</p>
+                        <button class="btn-primary" onclick="closeSearchResults()">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LIBRARIES -->
+    <script src="/js/user-account.js"></script>
+    <script src="/js/login-integration.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/api-service.js"></script>
+    <script src="/js/data-loader.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/atm.js"></script>
+    <script src="/js/gasstation.js"></script>
+    <script src="/js/transport.js"></script>
+
+</body>
+</html>

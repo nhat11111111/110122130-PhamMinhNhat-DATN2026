@@ -1,0 +1,475 @@
+/* ==================== DIGITAL MAP PAGE STYLES ==================== */
+
+/* Main Container */
+.digital-map-main-content {
+    background-color: #f5f5f5;
+    min-height: calc(100vh - 300px);
+    padding: 40px 0;
+}
+
+.digital-map-container {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Page Header */
+.page-header-digitalmap {
+    background: linear-gradient(135deg, #d4854c 0%, #003a7a 100%);
+    color: white;
+    padding: 40px 20px;
+    margin: -40px 0 40px 0;
+    text-align: center;
+    border-radius: 0;
+}
+
+.page-header-digitalmap h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.page-header-digitalmap p {
+    font-size: 16px;
+    margin: 0;
+    opacity: 0.95;
+}
+
+/* Main Layout: Sidebar + Content */
+.digital-map-wrapper {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Sidebar Styling */
+.digital-map-sidebar {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Search Group */
+.map-search-group {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.map-search-group .filter-title {
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #003a7a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.map-search-group .search-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.map-search-group .search-input:focus {
+    outline: none;
+    border-color: #d4854c;
+    box-shadow: 0 0 5px rgba(212, 132, 76, 0.2);
+}
+
+/* Filter Groups */
+.filter-group {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.filter-group:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.filter-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #003a7a;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filter-title i {
+    color: #d4854c;
+    font-size: 16px;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    transition: all 0.2s ease;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.filter-item:hover {
+    background-color: #f5f5f5;
+    color: #d4854c;
+}
+
+.filter-item input[type="checkbox"] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: #d4854c;
+}
+
+/* Legend */
+.map-legend {
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.map-legend .filter-title {
+    margin-bottom: 12px;
+    padding-bottom: 0;
+    border-bottom: none;
+    font-size: 13px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #333;
+}
+
+.legend-item:last-child {
+    margin-bottom: 0;
+}
+
+.legend-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.legend-marker.restaurant {
+    background-color: #e74c3c;
+}
+
+.legend-marker.attraction {
+    background-color: #3498db;
+}
+
+/* Places List */
+.places-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.places-list .filter-title {
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.places-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.place-item {
+    padding: 12px;
+    background-color: #f5f5f5;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+    font-size: 13px;
+}
+
+.place-item:hover {
+    background-color: #f0f0f0;
+    border-left-color: #d4854c;
+    transform: translateX(5px);
+}
+
+.place-item.active {
+    background-color: #fff3cd;
+    border-left-color: #d4854c;
+    font-weight: 600;
+}
+
+.place-item-name {
+    font-weight: 600;
+    color: #003a7a;
+    margin-bottom: 4px;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.place-item-category {
+    font-size: 11px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.place-item-category i {
+    font-size: 10px;
+    color: #d4854c;
+}
+
+/* Map Content Area */
+.digital-map-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Map Viewer */
+.map-viewer {
+    width: 100%;
+    height: 600px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #666;
+    font-size: 16px;
+}
+
+.map-loading i {
+    font-size: 40px;
+    margin-bottom: 15px;
+    color: #d4854c;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    background: linear-gradient(135deg, #f0f0f0, #f5f5f5);
+    text-align: center;
+    padding: 20px;
+}
+
+.map-placeholder i {
+    font-size: 80px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+.map-placeholder p {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: #666;
+}
+
+.map-placeholder small {
+    color: #bbb;
+    font-size: 14px;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+/* Tablets (1024px and below) */
+@media (max-width: 1024px) {
+    .digital-map-wrapper {
+        grid-template-columns: 250px 1fr;
+        gap: 20px;
+    }
+
+    .map-viewer {
+        height: 500px;
+    }
+}
+
+/* Medium Tablets (768px and below) */
+@media (max-width: 768px) {
+    .digital-map-wrapper {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .digital-map-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        height: auto;
+    }
+
+    .map-search-group,
+    .filter-group,
+    .map-legend,
+    .places-list {
+        padding-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        grid-column: 1;
+    }
+
+    .places-list {
+        grid-column: 2;
+        grid-row: 1 / 5;
+        max-height: 400px;
+    }
+
+    .map-viewer {
+        height: 400px;
+    }
+
+    .page-header-digitalmap h2 {
+        font-size: 26px;
+    }
+
+    .page-header-digitalmap p {
+        font-size: 14px;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .digital-map-wrapper {
+        gap: 15px;
+    }
+
+    .digital-map-sidebar {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 15px;
+    }
+
+    .map-search-group,
+    .filter-group,
+    .map-legend,
+    .places-list {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .places-list {
+        max-height: 300px;
+    }
+
+    .map-viewer {
+        height: 300px;
+    }
+
+    .page-header-digitalmap {
+        padding: 25px 10px;
+        margin: -25px 0 25px 0;
+    }
+
+    .page-header-digitalmap h2 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .page-header-digitalmap p {
+        font-size: 13px;
+    }
+
+    .filter-title {
+        font-size: 13px;
+    }
+
+    .place-item {
+        font-size: 12px;
+    }
+
+    .map-placeholder i {
+        font-size: 60px;
+    }
+
+    .map-placeholder p {
+        font-size: 16px;
+    }
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-size: 13px;
+}
+
+/* Breadcrumb (shared with other pages) */
+.breadcrumb {
+    padding: 15px 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: #d4854c;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb .separator {
+    margin: 0 10px;
+    color: #666;
+}
+
+.breadcrumb-item.active {
+    color: #333;
+    font-weight: 600;
+}

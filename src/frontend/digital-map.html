@@ -1,0 +1,114 @@
+<!-- DIGITAL MAP PAGE SECTION -->
+<!-- This file contains the HTML structure for the Digital Map (Bản Đồ Số) page -->
+<!-- Integration: This section should be placed in public/index.html as a hidden main element with id="digitalMapSection" -->
+
+<main class="digital-map-main-content" id="digitalMapSection" style="display: none;">
+    <div class="container digital-map-container">
+        <!-- Breadcrumb Navigation -->
+        <div class="breadcrumb">
+            <span class="breadcrumb-item">
+                <a href="javascript:showHomePage()">Trang chủ</a>
+            </span>
+            <span class="breadcrumb-separator">»</span>
+            <span class="breadcrumb-item active">Bản Đồ Số</span>
+        </div>
+
+        <!-- Page Header with Gradient Background -->
+        <div class="page-header-digitalmap">
+            <h2>BẢN ĐỒ SỐ VĨNH LONG</h2>
+            <p>Khám phá các địa điểm ăn uống và điểm tham quan trên bản đồ tương tác</p>
+        </div>
+
+        <!-- Main Layout: Sidebar + Map Content -->
+        <div class="digital-map-wrapper">
+            <!-- Left Sidebar: Filters and Places List -->
+            <aside class="digital-map-sidebar">
+                <!-- Search Section -->
+                <div class="map-search-group">
+                    <h3 class="filter-title">
+                        <i class="fas fa-search"></i> Tìm Kiếm
+                    </h3>
+                    <input type="text" id="mapSearch" placeholder="Nhập tên địa điểm..." class="search-input">
+                </div>
+
+                <!-- Category Filter Section -->
+                <div class="filter-group">
+                    <h3 class="filter-title">
+                        <i class="fas fa-list"></i> DANH MỤC
+                    </h3>
+                    <div class="filter-options">
+                        <label class="filter-item">
+                            <input type="checkbox" value="restaurant" class="map-category-filter" checked> 
+                            <i class="fas fa-utensils"></i> Ăn Uống
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox" value="attraction" class="map-category-filter" checked> 
+                            <i class="fas fa-camera"></i> Điểm Tham Quan
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Legend / Key -->
+                <div class="map-legend">
+                    <h3 class="filter-title">
+                        <i class="fas fa-layer-group"></i> Chỉ Dẫn
+                    </h3>
+                    <div class="legend-item">
+                        <span class="legend-marker restaurant"></span>
+                        <span>Ăn Uống</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-marker attraction"></span>
+                        <span>Điểm Tham Quan</span>
+                    </div>
+                </div>
+
+                <!-- Places List -->
+                <div class="places-list">
+                    <h3 class="filter-title">
+                        <i class="fas fa-list-ul"></i> Danh Sách Địa Điểm
+                    </h3>
+                    <div id="mapPlacesList" class="places-items">
+                        <div class="loading">Đang tải danh sách...</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Content: Map Viewer -->
+            <div class="digital-map-content">
+                <div id="mapContainer" class="map-viewer">
+                    <div class="map-loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Đang tải bản đồ...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 
+FEATURES:
+- Breadcrumb navigation for easy page tracking
+- Gradient header with page title and subtitle
+- Two-column layout (sidebar + map)
+- Search functionality for places
+- Category filters for Dining and Attractions
+- Legend showing marker colors
+- Scrollable list of all places with locations
+- Interactive map viewer
+
+STYLING:
+- All CSS classes are defined in digital-map.css
+- Responsive design for mobile, tablet, and desktop
+- Consistent with other pages (Attractions, Feedback, etc.)
+
+JAVASCRIPT:
+- showDigitalMapPage() - Main function to display this page
+- loadMapPlaces() - Load place data
+- loadSampleMapPlaces() - Create sample Vietnamese places
+- displayMapPlaces() - Render places to HTML
+- selectMapPlace(placeId) - Handle place selection
+- initializeMap() - Initialize the map display
+- filterMapByCategory(category) - Filter by dining or attractions
+-->

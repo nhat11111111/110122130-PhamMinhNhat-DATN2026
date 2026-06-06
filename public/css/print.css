@@ -1,0 +1,10 @@
+@media print {
+    body {
+        background: #ffffff;
+        color: #000000;
+    }
+
+    .site-header, .site-footer, .map, .nav-links {
+        display: none;
+    }
+}
